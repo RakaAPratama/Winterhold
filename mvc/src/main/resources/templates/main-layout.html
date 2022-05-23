@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity5"
+      xmlns:th="http://www.thymeleaf.org">
+<head th:fragment="head">
+    <meta charset="UTF-8">
+    <title>Pustaka</title>
+    <link rel="shortcut icon" th:href="@{/favicon.ico}" type="image/x-icon">
+    <!--css-->
+    <link rel="stylesheet" th:href="@{/resources/css/font-awesome.css}">
+    <link rel="stylesheet" th:href="@{/resources/css/normalize.css}">
+    <link rel="stylesheet" th:href="@{/resources/css/site.css}">
+    <!--    <script th:src="@{/resources/js/jquery-3.6.0.js}"></script>-->
+</head>
+
+<body>
+<nav th:fragment="navigator">
+    <div class="company-logo">
+        <img alt="Basilisk" th:src="@{/resources/image/logo.png}">
+        <h1>
+            Trade of <span class="bold">winterhold</span>
+        </h1>
+    </div>
+
+    <a class="menu category" th:href="@{/}">
+        <i class="fas fa-th"></i>
+        <span>Category</span>
+    </a>
+    <a class="menu supplier" th:href="@{/author}">
+        <i class="fab fa-pencil"></i>
+        <span>Author</span>
+    </a>
+
+</nav>
+<header th:fragment="header(breadCrumbs)">
+    <div class="bread-crumbs">
+        <span th:text="${breadCrumbs}"></span>
+    </div>
+
+</header>
+
+<footer th:fragment="footer">
+    Copyrights &copy; 2022
+    <span class="author">Raka A Pratama</span>
+    All rights reserved.
+</footer>
+
+<th:block th:fragment="javascript">
+    <script th:src="@{/resources/js/site.js}"></script>
+</th:block>
+</body>
+</html>

@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="~{main-layout :: head}"></head>
+<body class="main-body">
+
+<nav th:replace="~{main-layout :: navigator}"></nav>
+<header th:replace="~{main-layout :: header(${breadCrumbs})}"></header>
+
+<main>
+    <div class="grid-container author-index">
+
+        <form th:action="@{/author/index(fullName = ${fullName})}" method="get" class="filter">
+            <input type="text" name="fullName" placeholder="fullName.." th:value="${fullName}">
+            <button type="submit" class="blue-button">Search</button>
+        </form>
+
+        <a th:href="@{/author/upsert-form}" class="blue-button create-button">Add New Author</a>
+
+        <table>
+            <tbody>
+            <tr>
+                <th>Action</th>
+                <th>Full Name</th>
+                <th>Age</th>
+                <th>Status</th>
+                <th>Education</th>
+            </tr>
+            <tr th:each="author : ${authors}">
+                <td>
+                    <a th:href="@{/author/books(id = ${author.id})}" class="blue-button">Books</a>
+                    <a th:href="@{/author/upsert-form(id = ${author.id})}" class="blue-button update-button">Edit</a>
+                    <a th:href="@{/author/delete(id = ${author.id})}" class="blue-button delete-button">Delete</a>
+                </td>
+                <td th:text="${author.fullName}"></td>
+                <td th:text="${author.age}"></td>
+                <td th:text="${author.status}"></td>
+                <td th:text="${author.education}"></td>
+
+            </tr>
+            </tbody>
+            <tfoot>
+            <tr>
+                <td colspan="3">
+                    <div class="pagination">
+                        <div th:text="|Page ${page} of ${totalPage}|"></div>
+                        <div>
+                            <a      th:each="pageLoop : ${#numbers.sequence(1, (totalPage < 1) ? 1 : totalPage)}"
+                                    th:href="@{/author/index(page=${pageLoop}, fullName=${fullName})}"
+                                    th:text="${pageLoop}">
+                            </a>
+                        </div>
+                    </div>
+                </td>
+            </tfoot>
+        </table>
+    </div>
+</main>
+
+<footer th:replace="~{main-layout :: footer}"></footer>
+
+<th:block th:replace="~{main-layout :: javascript}"></th:block>
+
+</body>
+</html>
