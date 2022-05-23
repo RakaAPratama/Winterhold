@@ -1,8 +1,10 @@
 package com.winterhold.mvc.controllers;
 
 import com.winterhold.mvc.dtos.author.AuthorDTO;
+import com.winterhold.mvc.dtos.author.AuthorDetailGridDTO;
 import com.winterhold.mvc.dtos.author.AuthorGridDTO;
 import com.winterhold.mvc.dtos.author.UpdateInsertAuthorDTO;
+import com.winterhold.mvc.models.Book;
 import com.winterhold.mvc.services.AuthorService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -13,6 +15,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import javax.validation.Valid;
+import java.time.LocalDate;
 import java.util.List;
 
 @Controller
@@ -66,5 +69,26 @@ public class AuthorController {
             redirectAttributes.addFlashAttribute("message", "Delete Successfully");
         }
         return "redirect:/author/index";
+    }
+
+    @GetMapping("books")
+    public String books(@RequestParam Long id, Model model,
+                         @RequestParam(defaultValue = "1") int page){
+
+        UpdateInsertAuthorDTO author = authorService.findById(id);
+        AuthorGridDTO authorGridDTO = AuthorGridDTO.convertAuthor(author);
+
+        Page<Book> allBooks = authorService.findAllBooksByAuthor(id, page);
+        List<AuthorDetailGridDTO> books = AuthorDetailGridDTO.convert(allBooks.getContent());
+        model.addAttribute("author", authorGridDTO);
+        model.addAttribute("books", books);
+        model.addAttribute("breadCrumbs", "Author / Books");
+        model.addAttribute("totalPage", allBooks.getTotalPages());
+        model.addAttribute("page", page);
+        return "author/author-books";
+
+
+
+
     }
 }
