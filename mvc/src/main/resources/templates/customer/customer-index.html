@@ -9,32 +9,33 @@
 <main>
     <div class="grid-container author-index">
 
-        <form th:action="@{/author/index(fullName = ${fullName})}" method="get" class="filter">
-            <input type="text" name="fullName" placeholder="Fullname..." th:value="${fullName}">
+        <form class="filter">
+            <input type="text" name="id" placeholder="Number..">
+            <input type="text" name="fullName" placeholder="Name..">
             <button type="submit" class="blue-button">Search</button>
         </form>
 
-        <a th:href="@{/author/upsert-form}" class="blue-button create-button">Add New Author</a>
+        <a th:href="@{/customer/upsert-form}" class="blue-button create-button">Add New Customer</a>
+        <div class="field-validation-error" th:text="${error}" th:if="${error}"></div>
+        <div class="field-validation-success" th:text="${success}" th:if="${success}"></div>
 
         <table>
             <tbody>
             <tr>
                 <th>Action</th>
+                <th>Membership Number</th>
                 <th>Full Name</th>
-                <th>Age</th>
-                <th>Status</th>
-                <th>Education</th>
+                <th>Expire Date</th>
             </tr>
-            <tr th:each="author : ${authors}">
+            <tr th:each="customer : ${customers}">
                 <td>
-                    <a th:href="@{/author/books(id = ${author.id})}" class="blue-button">Books</a>
-                    <a th:href="@{/author/upsert-form(id = ${author.id})}" class="blue-button update-button">Edit</a>
-                    <a th:href="@{/author/delete(id = ${author.id})}" class="blue-button delete-button">Delete</a>
+                    <a th:href="@{/customer/upsert-form(id = ${customer.id})}" class="blue-button update-button">Edit</a>
+                    <a th:href="@{/customer/delete(id = ${customer.id})}" class="blue-button delete-button">Delete</a>
+                    <a th:href="@{/customer/extend(id = ${customer.id})}" class="blue-button">Extend</a>
                 </td>
-                <td th:text="${author.fullName}"></td>
-                <td th:text="${author.age}"></td>
-                <td th:text="${author.status}"></td>
-                <td th:text="${author.education}"></td>
+                <td th:text="${customer.id}"></td>
+                <td th:text="${customer.fullName}"></td>
+                <td th:text="${customer.membershipExpireDate}"></td>
 
             </tr>
             </tbody>
@@ -45,7 +46,7 @@
                         <div th:text="|Page ${page} of ${totalPage}|"></div>
                         <div>
                             <a      th:each="pageLoop : ${#numbers.sequence(1, (totalPage < 1) ? 1 : totalPage)}"
-                                    th:href="@{/author/index(page=${pageLoop}, fullName=${fullName})}"
+                                    th:href="@{/customer/index(page=${pageLoop}, id=${id}, fullName=${fullName})}"
                                     th:text="${pageLoop}">
                             </a>
                         </div>

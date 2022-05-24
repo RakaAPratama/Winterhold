@@ -4,6 +4,7 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import org.hibernate.annotations.Formula;
 
 import javax.persistence.*;
 import java.time.LocalDate;
@@ -55,4 +56,9 @@ public class Author {
         this.education = education;
         this.summary = summary;
     }
+
+    @Formula("CONCAT(FirstName, ' ', LastName)")
+    private String fullName;
+
+    public String getFullName(){return this.firstName+" "+this.lastName;}
 }

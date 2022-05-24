@@ -1,5 +1,11 @@
 package com.winterhold.mvc.models;
 
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+import org.hibernate.annotations.Formula;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
@@ -9,6 +15,10 @@ import java.util.LinkedHashSet;
 import java.util.Set;
 
 @Entity
+@AllArgsConstructor
+@NoArgsConstructor
+@Getter
+@Setter
 public class Customer {
     @Id
     @Column(name = "MembershipNumber", nullable = false, length = 20)
@@ -38,76 +48,21 @@ public class Customer {
     @OneToMany(mappedBy = "customerNumber")
     private Set<Loan> loans = new LinkedHashSet<>();
 
-    public String getId() {
-        return id;
+    @Formula("CONCAT(FirstName, ' ', LastName)")
+    private String fullName;
+
+    public String getFullName() {
+        return this.firstName + " " + this.lastName;
     }
 
-    public void setId(String id) {
+    public Customer(String id, String firstName, String lastName, LocalDate birthDate, String gender, String phone, String address, LocalDate membershipExpireDate) {
         this.id = id;
-    }
-
-    public String getFirstName() {
-        return firstName;
-    }
-
-    public void setFirstName(String firstName) {
         this.firstName = firstName;
-    }
-
-    public String getLastName() {
-        return lastName;
-    }
-
-    public void setLastName(String lastName) {
         this.lastName = lastName;
-    }
-
-    public LocalDate getBirthDate() {
-        return birthDate;
-    }
-
-    public void setBirthDate(LocalDate birthDate) {
         this.birthDate = birthDate;
-    }
-
-    public String getGender() {
-        return gender;
-    }
-
-    public void setGender(String gender) {
         this.gender = gender;
-    }
-
-    public String getPhone() {
-        return phone;
-    }
-
-    public void setPhone(String phone) {
         this.phone = phone;
-    }
-
-    public String getAddress() {
-        return address;
-    }
-
-    public void setAddress(String address) {
         this.address = address;
-    }
-
-    public LocalDate getMembershipExpireDate() {
-        return membershipExpireDate;
-    }
-
-    public void setMembershipExpireDate(LocalDate membershipExpireDate) {
         this.membershipExpireDate = membershipExpireDate;
     }
-
-    public Set<Loan> getLoans() {
-        return loans;
-    }
-
-    public void setLoans(Set<Loan> loans) {
-        this.loans = loans;
-    }
-
 }

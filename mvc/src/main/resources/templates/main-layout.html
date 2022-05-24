@@ -3,7 +3,7 @@
       xmlns:th="http://www.thymeleaf.org">
 <head th:fragment="head">
     <meta charset="UTF-8">
-    <title>Pustaka</title>
+    <title>Winterhold</title>
     <link rel="shortcut icon" th:href="@{/favicon.ico}" type="image/x-icon">
     <!--css-->
     <link rel="stylesheet" th:href="@{/resources/css/font-awesome.css}">
@@ -17,17 +17,25 @@
     <div class="company-logo">
         <img alt="Basilisk" th:src="@{/resources/image/logo.png}">
         <h1>
-            Trade of <span class="bold">winterhold</span>
+            <span class="bold">winterhold library</span>
         </h1>
     </div>
 
-    <a class="menu category" th:href="@{/}">
+    <a class="menu home" th:href="@{/home}">
         <i class="fas fa-th"></i>
-        <span>Category</span>
+        <span>Home</span>
     </a>
-    <a class="menu supplier" th:href="@{/author}">
+    <a class="menu author" th:href="@{/author}">
         <i class="fas fa-pencil-alt"></i>
-        <span>Author</span>
+        <span>Authors</span>
+    </a>
+    <a class="menu book" th:href="@{/book}">
+        <i class="fas fa-book"></i>
+        <span>Books</span>
+    </a>
+    <a class="menu customer" th:href="@{/customer}">
+        <i class="fas fa-users"></i>
+        <span>Customers</span>
     </a>
 
 </nav>

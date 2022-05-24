@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="~{main-layout :: head}"></head>
+<body class="main-body">
+
+<nav th:replace="~{main-layout :: navigator}"></nav>
+<header th:replace="~{main-layout :: header(${breadCrumbs})}"></header>
+
+<main>
+    <form class="upsert-form" method="post" th:action="@{/book/category-upsert}" th:object="${category}">
+        <!-- create categoryName, floor, isle, bay-->
+        <table>
+            <tbody>
+            <tr>
+                <td>
+                    <label>Category Name* :</label>
+                </td>
+                <td>
+                    <input name="id" th:field="*{id}" type="text">
+                    <div class="field-validation-error" th:errors="*{id}"></div>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <label>Floor* :</label>
+                </td>
+                <td>
+                    <input name="floor" th:field="*{floor}" type="text">
+                    <div class="field-validation-error" th:errors="*{floor}"></div>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <label>Isle* :</label>
+                </td>
+                <td>
+                    <input name="isle" th:field="*{isle}" type="text">
+                    <div class="field-validation-error" th:errors="*{isle}"></div>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <label>Bay* :</label>
+                </td>
+                <td>
+                    <input name="bay" th:field="*{bay}" type="text">
+                    <div class="field-validation-error" th:errors="*{bay}"></div>
+                </td>
+            </tr>
+
+            </tbody>
+        </table>
+
+        <button class="blue-button" type="submit">Save</button>
+        <a th:href="@{/book}" class="blue-button create-button">Close</a>
+    </form>
+</main>
+
+<footer th:replace="~{main-layout :: footer}"></footer>
+
+<th:block th:replace="~{main-layout :: javascript}"></th:block>
+
+</body>
+</html>

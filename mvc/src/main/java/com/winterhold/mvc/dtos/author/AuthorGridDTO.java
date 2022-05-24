@@ -36,11 +36,19 @@ public class AuthorGridDTO {
         this.summary = summary;
     }
 
+
+
     public static List<AuthorGridDTO> convert(List<AuthorDTO> authorDtos) {
         List<AuthorGridDTO> result = new ArrayList<>();
 
         for (AuthorDTO authorDto : authorDtos) {
-            long age  = ChronoUnit.YEARS.between(authorDto.getBirthDate(), LocalDate.now());
+            long age;
+
+            if (authorDto.getDeceasedDate() == null) {
+                age  = ChronoUnit.YEARS.between(authorDto.getBirthDate(), LocalDate.now());
+            } else{
+                age  = ChronoUnit.YEARS.between(authorDto.getBirthDate(), authorDto.getDeceasedDate());
+            }
             result.add(new AuthorGridDTO(
                     authorDto.getId(),
                     authorDto.getFullName(),

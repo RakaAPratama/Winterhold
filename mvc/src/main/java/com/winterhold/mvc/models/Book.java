@@ -46,4 +46,13 @@ public class Book {
     @OneToMany(mappedBy = "bookCode")
     private Set<Loan> loans = new LinkedHashSet<>();
 
+    public Book(String id, String title, Category categoryName, Author author, String summary, LocalDate releaseDate, Integer totalPage) {
+        this.id = id;
+        this.title = title;
+        this.categoryName = categoryName;
+        this.author = author;
+        this.summary = summary;
+        this.releaseDate = releaseDate;
+        this.totalPage = totalPage;
+    }
 }

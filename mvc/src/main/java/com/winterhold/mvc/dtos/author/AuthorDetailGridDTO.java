@@ -15,6 +15,7 @@ public class AuthorDetailGridDTO implements Serializable {
     private final String id;
     private final String title;
     private final String categoryName;
+    private final String authorName;
     private final String isBorrowed;
     private final String releaseDate;
     private final Integer totalPage;
@@ -28,8 +29,9 @@ public class AuthorDetailGridDTO implements Serializable {
                     book.getId(),
                     book.getTitle(),
                     book.getCategoryName().getId(),
+                    book.getAuthor().getFullName(),
                     book.getIsBorrowed() == false ? "Available" : "Borrowed",
-                    book.getReleaseDate().format(indoFormat),
+                    book.getReleaseDate() == null ? "-" : book.getReleaseDate().format(indoFormat),
                     book.getTotalPage()
             ));
         }

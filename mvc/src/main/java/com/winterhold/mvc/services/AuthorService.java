@@ -14,6 +14,7 @@ import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
+import java.util.List;
 
 @Service
 public class AuthorService {
@@ -69,6 +70,11 @@ public class AuthorService {
     public Page<Book> findAllBooksByAuthor(Long id, int page){
         Page<Book> allBooks = bookRepository.findByAuthorId(id, PageRequest.of(page - 1, PAGE_LIMIT, Sort.by("id")));
         return allBooks;
+    }
+
+    public List<AuthorDTO> findAllAuthors(){
+        List<Author> authors = authorRepository.findAll();
+        return AuthorDTO.convertAuthor(authors);
     }
 
 }
