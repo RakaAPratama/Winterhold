@@ -1,6 +1,7 @@
 package com.winterhold.mvc.services;
 
 import com.winterhold.mvc.dtos.customer.CustomerDTO;
+import com.winterhold.mvc.dtos.customer.CustomerDetailDTO;
 import com.winterhold.mvc.dtos.customer.UpdateInsertCustomerDTO;
 import com.winterhold.mvc.models.Customer;
 import com.winterhold.mvc.repositories.CustomerRepository;
@@ -11,12 +12,16 @@ import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
+import java.util.List;
 
 @Service
 public class CustomerService {
 
-    @Autowired
     private CustomerRepository customerRepository;
+    @Autowired
+    public CustomerService(CustomerRepository customerRepository) {
+        this.customerRepository = customerRepository;
+    }
 
     private final int PAGE_LIMIT = 5;
 
@@ -63,5 +68,22 @@ public class CustomerService {
                 .orElseThrow(()-> new IllegalArgumentException("Customer not found"));
         customer.setMembershipExpireDate(customer.getMembershipExpireDate().plusYears(2));
         customerRepository.save(customer);
+    }
+
+    public List<CustomerDTO> findAllCustomerNotExp(){
+        return customerRepository.findAllCustomerNotExp();
+    }
+
+    public CustomerDetailDTO findCustomerDetailById(String id){
+        Customer customer = customerRepository.findById(id)
+                .orElseThrow(() -> new IllegalArgumentException("Customer not found"));
+        return new CustomerDetailDTO(
+                customer.getId(),
+                customer.getFullName(),
+                customer.getBirthDate(),
+                customer.getGender(),
+                customer.getPhone(),
+                customer.getAddress()
+        );
     }
 }

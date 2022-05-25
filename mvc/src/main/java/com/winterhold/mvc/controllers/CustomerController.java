@@ -39,6 +39,15 @@ public class CustomerController {
         return "customer/customer-index";
     }
 
+    @GetMapping("detail")
+    public String detailCustomer(@RequestParam(required = false) String id, Model model){
+        if (id != null){
+            model.addAttribute("detail", customerService.findCustomerDetailById(id));
+            model.addAttribute("breadCrumbs", "Loan / Detail");
+        }
+        return "customer/customer-detail";
+    }
+
     @GetMapping("upsert-form")
     public String updateInsertForm(@RequestParam(required = false) String id, Model model){
         if (id != null){

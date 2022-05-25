@@ -1,5 +1,6 @@
 package com.winterhold.mvc.services;
 
+import com.winterhold.mvc.dtos.book.BookDTO;
 import com.winterhold.mvc.dtos.book.UpdateInsertBookDTO;
 import com.winterhold.mvc.dtos.category.UpdateInsertCategoryDTO;
 import com.winterhold.mvc.models.Author;
@@ -14,6 +15,8 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+
+import java.util.List;
 
 @Service
 @Transactional
@@ -103,5 +106,9 @@ public class BookService {
         Book book = bookRepository.findById(deleteBookId)
                 .orElseThrow(() -> new IllegalArgumentException("Book not found"));
         bookRepository.delete(book);
+    }
+
+    public List<BookDTO> findAllBookAvailable(){
+        return bookRepository.findAllBookAvailable();
     }
 }

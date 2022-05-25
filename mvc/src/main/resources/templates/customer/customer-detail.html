@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="https://www.thymeleaf.org">
+<head th:replace="~{main-layout :: head}">
+</head>
+<body class="main-body">
+<nav th:replace="~{main-layout :: navigator}"></nav>
+
+<header th:replace="~{main-layout :: header(${breadCrumbs})}"></header>
+<main>
+    <div class="grid-container">
+        <section th:object="${detail}" class="header-info">
+            <div>Membership Number : <span th:text="*{id}"></span></div>
+            <div>Full Name : <span th:text="*{fullName}"></span></div>
+            <div>Birth Date : <span th:text="*{birthDate}"></span></div>
+            <div>Gender : <span th:text="*{gender}"></span></div>
+            <div>Phone : <span th:text="*{phone}"></span></div>
+            <div>Address : <span th:text="*{address}"></span></div>
+        </section>
+        <a th:href="@{/customer}" class="blue-button submit-button">Back To Customer</a>
+    </div>
+</main>
+<footer th:replace="~{main-layout :: footer}"></footer>
+</body>
+</html>

@@ -10,12 +10,12 @@
     <div class="grid-container author-index">
 
         <form class="filter">
-            <input type="text" name="id" placeholder="Number..">
-            <input type="text" name="fullName" placeholder="Name..">
+            <input type="text" name="titleBook" placeholder="Book Title...">
+            <input type="text" name="fullName" placeholder="Customer Name...">
             <button type="submit" class="blue-button">Search</button>
         </form>
 
-        <a th:href="@{/customer/upsert-form}" class="blue-button create-button">Add New Customer</a>
+        <a th:href="@{/loan/upsert-form}" class="blue-button create-button">Add New Loan</a>
         <div class="field-validation-error" th:text="${error}" th:if="${error}"></div>
         <div class="field-validation-success" th:text="${success}" th:if="${success}"></div>
 
@@ -23,21 +23,23 @@
             <tbody>
             <tr>
                 <th>Action</th>
-                <th>Membership Number</th>
-                <th>Full Name</th>
-                <th>Expire Date</th>
+                <th>Book Title</th>
+                <th>Customer Name</th>
+                <th>Loan Date</th>
+                <th>Due Date</th>
+                <th>Return Date</th>
             </tr>
-            <tr th:each="customer : ${customers}">
+            <tr th:each="loan : ${loans}">
                 <td>
-                    <a th:href="@{/customer/upsert-form(id = ${customer.id})}" class="blue-button update-button">Edit</a>
-                    <a th:href="@{/customer/delete(id = ${customer.id})}" class="blue-button delete-button">Delete</a>
-                    <a th:href="@{/customer/extend(id = ${customer.id})}" class="blue-button">Extend</a>
+                    <a th:href="@{/loan/detail(id = ${loan.id})}" class="blue-button delete-button">Detail</a>
+                    <a th:href="@{/loan/upsert-form(id = ${loan.id})}" class="blue-button update-button">Edit</a>
+                    <a th:href="@{/loan/return(id = ${loan.id})}" class="blue-button">Return</a>
                 </td>
-                <td>
-                    <a th:text="${customer.id}" th:href="@{/customer/detail(id = ${customer.id})}"></a>
-                </td>
-                <td th:text="${customer.fullName}"></td>
-                <td th:text="${customer.membershipExpireDate}"></td>
+                <td th:text="${loan.title}"></td>
+                <td th:text="${loan.customerFullName}"></td>
+                <td th:text="${loan.loanDate}"></td>
+                <td th:text="${loan.dueDate}"></td>
+                <td th:text="${loan.returnDate}"></td>
 
             </tr>
             </tbody>
@@ -48,7 +50,7 @@
                         <div th:text="|Page ${page} of ${totalPage}|"></div>
                         <div>
                             <a      th:each="pageLoop : ${#numbers.sequence(1, (totalPage < 1) ? 1 : totalPage)}"
-                                    th:href="@{/customer/index(page=${pageLoop}, id=${id}, fullName=${fullName})}"
+                                    th:href="@{/loan/index(page=${pageLoop}, titleBook=${titleBook}, fullName=${fullName})}"
                                     th:text="${pageLoop}">
                             </a>
                         </div>

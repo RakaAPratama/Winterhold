@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="https://www.thymeleaf.org">
+<head th:replace="~{main-layout :: head}">
+</head>
+<body class="main-body">
+<nav th:replace="~{main-layout :: navigator}"></nav>
+<header th:replace="~{main-layout :: header(${breadCrumbs})}"></header>
+<main>
+
+    <div class="upsert-form" th:object="${loanDetail}">
+        <table>
+            <thead>
+            <th>Book</th>
+            <th></th>
+            <th></th>
+            <th></th>
+            <th></th>
+            <th></th>
+            <th></th>
+            <th></th>
+            <th></th>
+            <th></th>
+            <th></th>
+            <th></th>
+            <th></th>
+            <th></th>
+            <th></th>
+            <th></th>
+            <th></th>
+            <th></th>
+            <th></th>
+            <th></th>
+            <th></th>
+            <th></th>
+            <th></th>
+            <th></th>
+            <th></th>
+            <th></th>
+            <th></th>
+            <th></th>
+            <th></th>
+            <th></th>
+            <th></th>
+            <th></th>
+            <th></th>
+            <th></th>
+            <th></th>
+            <th></th>
+            <th></th>
+            <th>Customer</th>
+            </thead>
+            <tr>
+                <td>
+                    <table>
+                        <tbody>
+                        <tr>
+                            <td><label>Title</label></td>
+                            <td th:text="|: ${loanDetail.bookTitle}|"></td>
+                        </tr>
+                        <tr>
+                            <td><label>Category</label></td>
+                            <td th:text="|: ${loanDetail.bookCategoryName}|"></td>
+                        </tr>
+                        <tr>
+                            <td><label> Author</label></td>
+                            <td th:text="|: ${loanDetail.bookAuthorFullName}|"></td>
+                        </tr>
+                        <tr>
+                            <td><label>Floor</label></td>
+                            <td th:text="|: ${loanDetail.bookCategoryFloor}|"></td>
+                        </tr>
+                        <tr>
+                            <td><label>Isle</label></td>
+                            <td th:text="|: ${loanDetail.bookCategoryIsle}|"></td>
+                        </tr>
+                        <tr>
+                            <td><label>Bay</label></td>
+                            <td th:text="|: ${loanDetail.bookCategoryBay}|"></td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+
+                <td>
+                    <table>
+                        <tbody>
+                        <tr>
+                            <td><label>MemberShip Number</label></td>
+                            <td th:text="|: ${loanDetail.customerNumberId}|"></td>
+                        </tr>
+                        <tr>
+                            <td><label>Full Name</label></td>
+                            <td th:text="|: ${loanDetail.customerNumberFullName}|"></td>
+                        </tr>
+                        <tr>
+                            <td><label>Phone</label></td>
+                            <td th:text="|: ${loanDetail.customerNumberPhone}|"></td>
+                        </tr>
+                        <tr>
+                            <td><label>Membership Expire Date</label></td>
+                            <td th:text="|: ${loanDetail.customerNumberMembershipExpireDate}|"></td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </td>
+            </tr>
+        </table>
+
+        <a th:href="@{/loan}" class="blue-button submit-button">Back To Index</a>
+    </div>
+
+
+
+</main>
+
+
+</body>
+</html>

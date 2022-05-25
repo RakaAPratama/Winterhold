@@ -7,6 +7,8 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 
+import java.util.List;
+
 public interface CustomerRepository extends JpaRepository<Customer, String> {
 
     @Query("""
@@ -17,4 +19,12 @@ public interface CustomerRepository extends JpaRepository<Customer, String> {
             AND cus.fullName LIKE %:fullName%
             """)
     Page<CustomerDTO> findAllCustomer(String id, String fullName, Pageable pageable);
+
+    @Query("""
+            SELECT new com.winterhold.mvc.dtos.customer.CustomerDTO
+            (cus.id, cus.fullName, cus.membershipExpireDate)
+            FROM Customer cus
+            WHERE cus.membershipExpireDate >= GETDATE()
+            """)
+    List<CustomerDTO> findAllCustomerNotExp();
 }
